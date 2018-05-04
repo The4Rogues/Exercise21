@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+RUN THIS PAGE FIRST
+-->
+<html>
+    <head>
+        <title>Library Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    </head>
+    
+    <body>
+        
+ <!-- Go to Search Catalogue Page
+ -->
+        <button type="button" onclick=" ">
+            <a href='SearchCataloguePage.php' >Search catalogue</a>
+        </button>
+ 
+<!--  User logs on
+ -->        
+        <h1>Log into library account</h1>
+        
+        <form action="LibraryHomePage.php"  
+              method="post" >
+     
+            <p>Username: <input type="text" autofocus="true" name="username" required />  
+               Password: <input type="password" name="password" required /></p>
+
+                <input type="submit" value="Login" />
+        </form>
+ 
+ <!--  Create new user account ie join library
+ -->       
+        <h1>Not a library member?</h1>
+        <a href ='CreateAccount.html'>Create account</a>
+       
+    </body>
+
+</html>

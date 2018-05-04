@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+-->
+<html>
+    <head>
+        <title>Join library</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+        
+        <h1>Create library account</h1>
+        
+        <h2>Please fill in all fields</h2>
+        
+        <form action="CreateAccount.php"  
+              method="post" >
+     
+                <p>First name: <input type="text" autofocus="true" name="firstname" required/>
+                Last name: <input type="text" name="lastname" required /></p>
+                
+                <p>Choose a username: <input type="text" name="username" required />  
+                Choose a password: <input type="password" name="password" required/></p>
+                
+                <div>Address:</div><textarea  name="address" rows="3" cols="100" required/></textarea> 
+                
+                <p>Email: <input type="email" name="email"  placeholder="example@gmail.com" required />
+                Telephone: <input type="number" name="phone" maxlength="12" required />
+                Date of birth: <input type="date" name="dob" required /></p>
+
+                <input type="submit" value="Create account" />
+        </form>
+        
+    </body>
+</html>

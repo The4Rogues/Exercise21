@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Update Personal Details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Update Personal Details</h1>
+        <!-- These fields need to be prefilled (from $_SESSION?)
+                so I'm thinking this needs to be in the php file
+        -->
+        <form action="UpdatePersonal.php"  
+              method="post" >
+     
+                <p>First name: <input type="text" autofocus="true" name="firstname" required/>
+                Last name: <input type="text" name="lastname" required /></p>
+                
+                <p>Username: <input type="text" name="username" required />  
+                Password: <input type="password" name="password" required/></p>
+                
+                <div>Address:</div><textarea  name="address" rows="3" cols="100" required/></textarea> 
+                
+                <p>Email: <input type="email" name="email"  placeholder="example@gmail.com" required />
+                Telephone: <input type="tel" name="phone" required />
+                Date of birth: <input type="date" name="dob"  disabled /></p>
+
+                <input type="submit" value="Save changes" />
+                
+          </form>    
+        
+          <button type="button" onclick=" ">
+                <a href='LibraryHomePage.html' >Cancel</a> 
+          </button>
+                
+       
+        
+    </body>
+</html>
+<!--
+$_SESSION["firstname"] = $_POST["firstname"];
+            $_SESSION["lastname"] = $_POST["lastname"];
+            $_SESSION["username"] = $_POST["username"];
+            $_SESSION["password"] = $_POST["password"];
+            $_SESSION["address"] = $_POST["address"];
+            $_SESSION["email"] = $_POST["email"];
+            $_SESSION["phone"] = $_POST["phone"];
+            $_SESSION["dob"] = $_POST["dob"];
+           --> 
