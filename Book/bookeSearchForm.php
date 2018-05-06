@@ -1,25 +1,3 @@
-<?php
-
-/* 
- * 14 columns including id
- * text
- * publisher
- * year
- * edition
- * original price - no need
- * 
- * boolean
- * age restriction
- * is_lost - no need
- * is_reference
- * is_out_for_repair
- * 
- * radio button 
- * accessibility - large 1 brile 2 audio book 3
- * reader_levels - 1 Early_learner 2 Biginner_reader 3 Young_adult 4 Adult
- * 
- */
-?>
 <!DOCTYPE html>
 
 <html>
