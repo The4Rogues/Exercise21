@@ -5,8 +5,10 @@ class DB
     private $db;
     
     public function __construct() {
-        $dsn= 'mysql:host=localhost;dbname=test3';
+        $dsn= 'mysql:host=localhost;dbname=library';
         $this->db = new PDO($dsn, 'root','');
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
     
     public function query($sql, $args = []) {
