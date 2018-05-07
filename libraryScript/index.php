@@ -1,10 +1,11 @@
 
 <?php
 try {
-    require_once 'pdo_connect.php';
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once 'loan.php';
+    
+//    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //after writing select statement store result in result query
-    $result = $db->query($sql);
+//    $result = $db->query($sql);
     //PDO row count method returns the number of results in a result set.
     //report the number of rows in result set, if query produces any results 
     //else error no results found.
@@ -16,10 +17,13 @@ try {
     //$numrows = $count->fetchColumn(); this method works on different database 
     //management sytems. create if statement to ensure you only use one method. 
     //need to write if statement in body too.
-    $numrows = $result->rowCount();
+//    $numrows = $result->rowCount();
 } catch (Exception $e) {
- $error= $e->getMessage(); 
- ?>
+    $error= $e->getMessage(); 
+    die();
+}
+
+?>
 
 <!DOCTYPE html>
 
@@ -29,8 +33,25 @@ try {
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <table>
+            <thead>
+                <th>Book</th>
+                <th>Date Due</th>
+                <th>Borrower</th>
+            </thead>
+            <tbody>
+                <?php
+                    $loans = getLoans();
+                    foreach($loans as $loan) {
+                        echo "<tr>";
+                        echo "<td>{$loan['title']}</td>";
+                        echo "<td>{$loan['date_due']}</td>";
+                        echo "<td>{$loan['borrower_full_name']}</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+        
     </body>
 </html>
