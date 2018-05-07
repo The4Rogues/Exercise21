@@ -1,7 +1,7 @@
 
 <?php
 try {
-    require_once 'loan.php';
+    require_once 'backend/loan.php';
    
 } catch (Exception $e) {
     $error= $e->getMessage(); 
@@ -28,14 +28,14 @@ try {
             </thead>
             <tbody>
                 <?php
-                    $payCharges = payCharges();
-                    foreach($payCharges as $payCharge) {
+                    $chargesDue = chargesDue();
+                    foreach($chargesDue as $chargeDue) {
                         echo "<tr>";
-                        echo "<td>{$payCharge['title']}</td>";
-                        echo "<td>{$payCharge['date_in']}</td>";
-                        echo "<td>{$payCharge['date_due']}</td>";
-                        echo "<td>{$payCharge['borrower_full_name']}</td>";
-                        echo "<td>{$payCharge['amount_outstanding']}</td>";
+                        echo "<td>{$chargeDue['title']}</td>";
+                        echo "<td>{$chargeDue['date_in']}</td>";
+                        echo "<td>{$chargeDue['date_due']}</td>";
+                        echo "<td>{$chargeDue['borrower_full_name']}</td>";
+                        echo "<td>{$chargeDue['amount_outstanding']}</td>";
                         echo "</tr>";
                     }
                 ?>

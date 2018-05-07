@@ -1,6 +1,7 @@
 <?php
 
-class DB {
+class DB 
+{
     private $db;
     
     public function __construct() {
@@ -26,31 +27,4 @@ class DB {
         return;
     
     }
-
-//
-//
-//
-//// books.php
-//
-//require_once("db.php");
-//
-//function getAllBooks() {
-//    $db = new DB;
-//    return $db->query("SELECT * FROM books");
-//}
-//
-//function searchBookByTitle($title) {
-//    $db = new DB;
-//    return $db->query("SELECT * FROM books WHERE title LIKE '%{$title}%'");
-//}
-//
-//// loans.php
-//
-//require_once("db.php");
-//
-//function getAllLoansForBorrower($borrowerId) {
-//    $db = new DB;
-//    return $db->query("SELECT * FROM loans WHERE borrower_id = ?", [$borrowerId]);
-//}
-//
-// 
+}

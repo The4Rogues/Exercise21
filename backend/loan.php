@@ -1,4 +1,3 @@
-
 <?php
 //renew book, calculate outstanding charges per user, take book out, return book,
 // view over due books
@@ -13,10 +12,29 @@ function getLoans() {
     INNER JOIN	books ON books.id = borrowed_items.books_id
     INNER JOIN borrowers ON borrowers.id = borrowed_items.borrower_id 
     WHERE date_due <= now() 
-    AND date_in IS NULL"); 
-    
+    AND date_in IS NULL");
 }
- function payCharges() {
+
+function isBookAvail($bookid) {
+    $db = new DB;
+    $results = $db->query("SELECT books.id 
+    FROM borrowed_items 
+    INNER JOIN	books ON books.id = borrowed_items.books_id
+    INNER JOIN borrowers ON borrowers.id = borrowed_items.borrower_id 
+    WHERE date_due <= now() 
+    AND date_in IS NULL
+    AND books.id = ?", [$bookid]);
+
+    if (isset($results[0])){
+
+        return FALSE;
+    }
+    else {
+        return TRUE;
+    }
+}
+
+function chargesDue() {
      $db = new DB;
      return $db->query("SELECT 
 	books.title, 
@@ -34,15 +52,16 @@ INNER JOIN borrowers ON borrowers.id = borrowed_items.borrower_id
 LEFT JOIN borrowed_transactions ON borrowed_transactions.`borrowed_items_id` = `borrowed_items`.`id`
 WHERE ((date_due <= now() AND date_in IS NULL) 
 OR (date_due <= date_in))
-AND borrowed_transactions.id IS NULL");
+AND borrowed_transactions.id IS NULL");           
              
-             
- }   
+}   
     
  function bookOut($bookid, $borrowerid) {
-     $db = new DB;
-     return $db->insert("INSERT INTO borrowed_items (date_out, date_due, books_id, borrower_id)
+    $db = new DB;
+    return $db->insert("INSERT INTO borrowed_items (date_out, date_due, books_id, borrower_id)
 VALUES  (current_date, current_date + interval 21 day, ?, ?)", [$bookid, $borrowerid]);
+ 
+     
  }
      
      

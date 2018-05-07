@@ -1,5 +1,7 @@
 <?php
 
+require_once("db.php");
+
 /*
  * Search books on multiple criterias or none to list all books
  * return: multi dimentional associtive arrays
@@ -116,7 +118,7 @@ function searchBooks(){
  *  @param book.id
  *  return: string
  */
-Function check_status ($book_id){      
+function check_status ($book_id){      
     $sql2 = "SELECT b.books_id FROM borrowed_items as b WHERE b.date_in = 0000-00-00";
     $db = new DB();
     $status = $db->query($sql2);
