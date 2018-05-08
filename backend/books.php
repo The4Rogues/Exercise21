@@ -1,7 +1,5 @@
 <?php
 
-require_once("db.php");
-
 /*
  * Search books on multiple criterias or none to list all books
  * return: multi dimentional associtive arrays
@@ -118,7 +116,7 @@ function searchBooks(){
  *  @param book.id
  *  return: string
  */
-function check_status ($book_id){      
+Function check_status ($book_id){      
     $sql2 = "SELECT b.books_id FROM borrowed_items as b WHERE b.date_in = 0000-00-00";
     $db = new DB();
     $status = $db->query($sql2);
@@ -131,4 +129,123 @@ function check_status ($book_id){
     return $book_status;
 } 
 
+/*
+ * Adding book functions
+ * no returns. Should direct to a different page
+ */
+
+function addBooks(){
+    $title_a = $_POST['title_add'];
+    $isbn_a = $_POST['isbn_add'];
+    $publisher_a = $_POST['publisher_add'];
+    $year_a = $_POST['year_add'];
+
+    // new additions to add books
+    $edition_a = $_POST['edition_add'];
+    $price_a = $_POST['price_add'];
+
+    // Radio button value numbers
+    $genre_a = $_POST['gChoice'];
+    $access_a =$_POST['aChoice'];
+    $reader_level_a =$_POST['lChoice'];
+
+    // Drop down value 0 or 1
+    $age_rest_a = $_POST["age_restriction"];
+    $ref_only_a =$_POST["reference_only"];
+
+    // author table
+    $author_a = $_POST['author_add'];
+
+    // using books class constractor
+    $newBook = new books ($title_a, $isbn_a, $publisher_a, 
+                            $year_a, $edition_a, $price_a, 
+                            $genre_a, $access_a, $reader_level_a, 
+                            $age_rest_a, $ref_only_a);
+
+    // Prep for SQL
+    $isbn = $newBook->get_isbn();
+    $title = $newBook->get_title();
+    $publisher = $newBook->get_publisher();
+    $year = $newBook->get_year();
+    $age_restriction = $newBook->get_age_restriction();
+    // 0
+    $reference = $newBook->get_is_reference();
+    $edition = $newBook->get_edition();
+    // 0
+    $price = $newBook->get_original_price();
+    $accessibility_o = $newBook->get_accessibility_options_id();
+    $genre = $newBook->get_genre_id();
+    $reader_level = $newBook->get_reader_level_id();
+
+    // SQL for add books
+    $sql = "INSERT INTO books 
+                            (isbn, title, publisher,
+                            year, age_restriction,
+                            is_lost, is_reference,
+                            edition, is_out_for_repair,
+                            original_price, accessibility_options_id,
+                            genre_id, reader_level_id) 
+                    VALUES ('$isbn',
+                            '$title',
+                            '$publisher',
+                            $year,
+                            $age_restriction,
+                            0,
+                            $reference,
+                            '$edition',
+                            0,
+                            '$price',
+                            $accessibility_o,
+                            $genre,
+                            $reader_level)";
+
+
+    // connect to DB (DB class)
+    // $db = new DB;
+    // $db->insert($sql);
+
+    // SQL for adding author
+    $sql_add_author = "INSERT INTO authors (name) VALUES ('$author_a')";
+
+    // connect sql
+    $dsn= 'mysql:host=localhost;dbname=lib4';
+    $pdo = new PDO($dsn, 'root','');
+
+    // SQL for checking author exists
+    $sql_authors = "SELECT * FROM authors";
+
+    $stmt_author = $pdo->prepare($sql_authors);
+    $stmt_author->execute();
+    $results = $stmt_author->fetchAll(PDO::FETCH_ASSOC);
+    // print_r($results);
+
+    $author_id = 'no';
+
+    forEach($results as $result){
+        if ($result['name']==$author_a){
+            $author_id = $result['id'];
+        }
+    }
+
+    If ($author_id === 'no'){
+        $stmt_add_author = $pdo->prepare($sql_add_author);
+        $stmt_add_author->execute();
+        $author_id = $pdo->lastInsertId();
+        print_r($stmt_add_author);
+    }
+    // Adding books
+    $stmt_book = $pdo->prepare($sql);
+    $stmt_book->execute();
+    $book_id = $pdo->lastInsertId();
+
+    // SQL for add author_id and book id
+    $SQL_author_book = "INSERT INTO books_authors (books_id, author_id) VALUES('$book_id', '$author_id')";
+
+    $stmd_b_a = $pdo->prepare($SQL_author_book);
+    $stmd_b_a->execute();
+    //echo "book id ". $book_id."</br>";
+    //echo "author id ". $author_id."</br>";
+     echo "book added   ";
+     echo "This should re-direct to somewhere";
+ }
 ?>
