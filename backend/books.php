@@ -208,7 +208,7 @@ function addBooks(){
     $sql_add_author = "INSERT INTO authors (name) VALUES ('$author_a')";
 
     // connect sql
-    $dsn= 'mysql:host=localhost;dbname=lib4';
+    $dsn= 'mysql:host=localhost;dbname=library';
     $pdo = new PDO($dsn, 'root','');
 
     // SQL for checking author exists
