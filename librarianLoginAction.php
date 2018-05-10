@@ -34,9 +34,9 @@ echo $password."</br>";
 //    echo "booo";
 //}
 If ($password == $result){
-    echo " you are loggen in";
+    header('Location: librarianhomepage.php');
 } else{
-    echo "boo";
+    echo "boo your log in is wrong in";
 }
 
 

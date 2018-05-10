@@ -16,8 +16,8 @@
   <h1>Welcome to The 4 Rogues Library</h1>
 </div>
 <div class="topnav">
-  <a href="#">Log in</a>
-  <a href="#">Search Catalogue</a>
+  <a href="librarian.php">Log in</a>
+  <a href="BookSearchForm.php">Search Catalogue</a>
 </div>
 <div class="gallery">
     <img href="480864928.jpg" src="480864928.jpg" alt="Library" width= "600" height= "400"
