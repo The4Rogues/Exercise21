@@ -5,6 +5,24 @@
 */
 
 
+/* nav */
+
+#navbar ul li {  
+	display: inline; 
+	} 
+ 
+#navbar ul li a { 
+	text-decoration: none; 
+	padding: .2em 1em; 
+	color: #fff; 
+	background-color: #000; 
+	} 
+ 
+#navbar ul li a:hover { 
+	color: #000; 
+	background-color: #fff; 
+	} 
+
 /* Book search form */
 .form-wrapper {
     max-width: 800px;
@@ -46,4 +64,5 @@
 }
 
 
-/* css */
+/* css
+*/
