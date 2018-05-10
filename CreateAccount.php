@@ -1,34 +1,52 @@
 <?php
+include ('classes/borrower.php');
+include ('backend/db.php');
 
-/* 
+//$db = new DB;
 
- */
+session_start();
+ $_SESSION = [];
 
+if (!empty($_POST)){
 
-        session_start();
-         $_SESSION = [];
-       // session_destroy();
-        
-                        //set the session variables if the $_POST superglobal is not empty:
-                                      
-        if (!empty($_POST)){
-            $_SESSION["firstname"] = $_POST["firstname"];
-            $_SESSION["lastname"] = $_POST["lastname"];
-            $_SESSION["username"] = $_POST["username"];
-            $_SESSION["password"] = $_POST["password"];
-            $_SESSION["address"] = $_POST["address"];
-            $_SESSION["email"] = $_POST["email"];
-            $_SESSION["phone"] = $_POST["phone"];
-            $_SESSION["dob"] = $_POST["dob"];
+    //construct class
+    $borrower = new borrower($_POST["username"],$_POST["password"], $_POST["firstname"],
+            $_POST["lastname"], $_POST["dob"], $_POST["address"], $_POST["phone"], '20180504', $_POST["email"]);
+
+    //prep for sql
+   
+    $username = $borrower->get_username();
+    $password= $borrower->get_password();
+    $first_name= $borrower->get_first_name();
+    $last_name= $borrower->get_last_name();
+    $dob= $borrower->get_dob();
+    $address= $borrower->get_address();
+    $tel= $borrower->get_tel();
+    $acc_last_active= $borrower->get_acc_last_active();
+    $email= $borrower->get_email();  
+    
+    //print_r($borrower);
+    
+          
+    $sql = "INSERT INTO borrowers(username, password, first_name, last_name, email, address, tel, 
+        acc_last_active, is_active, date_of_birth) 
+        VALUES ('$username', '$password', '$first_name', '$last_name', '$email','$address', '$tel', '$acc_last_active',1,'$dob')";
+          
             
-            //SOME CODE here to insert record onto borrower_table on database
-            //Check username not already in use
-               
-           
-        }
+    }
+    // connect sql
+   $dsn= 'mysql:host=localhost;dbname=library';
+     
+   $pdo = new PDO($dsn, 'root','');
+
+    // Adding borrower
+   $add_borrower = $pdo->prepare($sql);
+   $add_borrower->execute();
+     
+
         
         // if the $_SESSION superglobal contains values:
-        //
+
         
         if (!empty($_SESSION)){   
             
@@ -38,6 +56,4 @@
             echo "<a href='LibraryHomePage.html'>Login</a><br>"; 
             
                   
-        }
-        
-        ?>
+}
