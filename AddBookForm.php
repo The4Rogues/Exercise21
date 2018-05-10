@@ -18,6 +18,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+    <header>
+        <div id = "navbar">
+            <ul>
+                <li><a href ="index.php">Home</a></li>
+                <li><a href ="login.php">Borrower Log in</a></li>
+                <li><a href ="librarian.php">Library Log In</a></li>
+            </ul>
+        </div>
+    </header>
         <section class="w3-container">
             <div class="form-wrapper">
                 <form action="addBookAction.php" method="POST">
