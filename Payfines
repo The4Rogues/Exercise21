@@ -1,0 +1,68 @@
+   
+  
+
+    <?php
+require_once("backend/loan.php")
+
+?>
+ <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Pay Fines</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    </head>
+    <body>  
+    <section class="w3-container">
+            <div class="form-wrapper">
+      <?php
+                if (isBookAvail($row['id'])) {
+                    ?>
+                    <p class="col-xs-6 col-md-4">Loan Status: Available</p>
+                    <p class="col-xs-6 col-md-4"><button onclick="location.href='CheckOut.php?bookid=<?= $row['id']?>';">Issue Book</button></p>
+                <?php
+                } else {
+                    echo '<p class="col-xs-6 col-md-4">Loan Status: Not Available</p>';
+                } ?>
+                
+                <p></p>
+            <?php 
+             ?>
+            
+           
+            </div>
+       </section>
+    </body>
+</html>
+
+
+
+<table>
+            <thead>
+                <th>Title</th>
+                <th>Date Due</th>
+                <th>Date in</th>
+                <th>Name</th>
+                <th>Amount Outstanding</th>
+            </thead>
+            <tbody>
+                <?php
+                    $chargesDue = chargesDue();
+                    foreach($chargesDue as $chargeDue) {
+                        echo "<tr>";
+                        echo "<td>{$chargeDue['title']}</td>";
+                        echo "<td>{$chargeDue['date_in']}</td>";
+                        echo "<td>{$chargeDue['date_due']}</td>";
+                        echo "<td>{$chargeDue['borrower_full_name']}</td>";
+                        echo "<td>{$chargeDue['amount_outstanding']}</td>";
+                        echo "</tr>";
+
+                       
+
+                        }
+                    }
+                ?>

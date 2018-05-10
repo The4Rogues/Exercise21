@@ -29,29 +29,44 @@ try {
 
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title></title>
+    <meta charset="UTF-8">
+        <title>Book Search</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <table>
-            <thead>
-                <th>Book</th>
-                <th>Date Due</th>
-                <th>Borrower</th>
-            </thead>
-            <tbody>
-                <?php
-                    $loans = getLoans();
-                    foreach($loans as $loan) {
-                        echo "<tr>";
-                        echo "<td>{$loan['title']}</td>";
-                        echo "<td>{$loan['date_due']}</td>";
-                        echo "<td>{$loan['borrower_full_name']}</td>";
-                        echo "</tr>";
-                    }
-                ?>
-            </tbody>
-        </table>
+    <section class="w3-container">
+      <div class="form-wrapper">
+        <h2>&nbsp;&nbsp;&nbsp;&nbsp;Loan Status</h2>
+        <p>
+
+          <div class="row">
+            <div class="w3-green col-xs-4">Title</div>
+            <div class="w3-green col-xs-4">Date Due</div> 
+            <div class="w3-green col-xs-4">Name</div>
+          </div>
+          <br>
+
+          <?php 
+          $loans = getLoans();
+          foreach($loans as $loan) { ?>
+
+          <div class="row">
+            <div class="col-xs-4">
+              <?=$loan['title'];?>
+            </div>
+            <div class="col-xs-4">
+              <?=$loan['date_due'];?>
+            </div>
+            <div class="col-xs-4">
+              <?=$loan['borrower_full_name'];?>
+            </div>
+          </div>
+            <br>   
+          <?php } ?>
+        </section>
         
     </body>
 </html>
