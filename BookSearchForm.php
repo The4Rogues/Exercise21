@@ -14,8 +14,9 @@
         <div id = "navbar">
             <ul>
                 <li><a href ="index.php">Home</a></li>
-                <li><a href ="login.php">Borrower Log in</a></li>
+                <li><a href ="login.html">Borrower Log in</a></li>
                 <li><a href ="librarian.php">Library Log In</a></li>
+                <li><a href ="CreateAccount.html">Registration</a></li>
             </ul>
         </div>
     </header>
